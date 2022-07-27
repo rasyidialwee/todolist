@@ -46,6 +46,14 @@ class SenaraiController extends Controller
         //     'name' => 'required|string|max:10',
         //     'description' => 'required|string'
         // ]);
+        $user = auth()->user();
+        $senarai = new Senarai();
+        $senarai->name = $request->name;
+        $senarai->description = $request->description;
+        $senarai->user_id = $user->id;
+        $senarai->save();
+
+        return $senarai;
     }
 
     /**

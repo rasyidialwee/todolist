@@ -3,6 +3,14 @@
     <span class="p-float-label">
       <InputText type="text" v-model="form.name" />
       <label for="username">Name</label>
+
+      <div v-if="errors.name">
+        <div v-if="errors.name.length > 0">
+          <p v-for="(err, i) in errors.name" :key="i" class="text-red-400">
+            {{ err }}
+          </p>
+        </div>
+      </div>
     </span>
     <span class="p-float-label">
       <InputText type="text" v-model="form.description" />
@@ -16,6 +24,7 @@
 export default {
   data() {
     return {
+      errors: [],
       form: {
         name: "",
         description: "",
@@ -31,7 +40,7 @@ export default {
           console.log("resp", resp);
         })
         .catch((err) => {
-          console.log(err);
+          this.errors = err.response.data.errors;
         })
         .then(() => {
           //code
