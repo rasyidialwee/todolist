@@ -1,11 +1,13 @@
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
 import List from "./List.vue";
+import SenaraiForm from "./Form.vue";
 
 export default {
   components: {
     AppLayout,
     List,
+    SenaraiForm,
   },
   props: ["senarais"],
   data() {
@@ -32,7 +34,7 @@ export default {
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Button label="+" @click="toggleForm" />
         <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-          <template v-if="isFormOpen"> Nanti Form kat sini</template>
+          <senarai-form v-if="isFormOpen" />
           <list v-else />
         </div>
       </div>

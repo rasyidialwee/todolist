@@ -14,6 +14,7 @@ import "primevue/resources/primevue.min.css"; //core css
 import "primeicons/primeicons.css";
 
 import Button from "primevue/button";
+import InputText from "primevue/inputtext";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
@@ -29,6 +30,7 @@ createInertiaApp({
         return createApp({ render: () => h(app, props) })
             .use(PrimeVue)
             .component("Button", Button)
+            .component("InputText", InputText)
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .mount(el);
