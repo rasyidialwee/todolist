@@ -35,4 +35,9 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/senarai', [SenaraiController::class, 'index']);
+
+    Route::post(
+        '/senarais',
+        [SenaraiController::class, 'store']
+    )->name('senarai.store');
 });

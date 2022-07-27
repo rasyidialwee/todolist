@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSenaraiRequest;
 use App\Http\Requests\UpdateSenaraiRequest;
 use App\Models\Senarai;
+use Illuminate\Http\Request;
 
 class SenaraiController extends Controller
 {
@@ -39,9 +40,9 @@ class SenaraiController extends Controller
      * @param  \App\Http\Requests\StoreSenaraiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreSenaraiRequest $request)
+    public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

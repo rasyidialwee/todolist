@@ -24,7 +24,18 @@ export default {
   },
   methods: {
     submit() {
-      console.log("aa", this.form);
+      //   console.log("aa", this.form);
+      axios
+        .post(route("senarai.store"), this.form)
+        .then((resp) => {
+          console.log("resp", resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .then(() => {
+          //code
+        });
     },
   },
 };
