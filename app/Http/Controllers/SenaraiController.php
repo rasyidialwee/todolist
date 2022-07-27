@@ -40,9 +40,12 @@ class SenaraiController extends Controller
      * @param  \App\Http\Requests\StoreSenaraiRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSenaraiRequest $request)
     {
-        dd($request->all());
+        // $validated = $request->validate([
+        //     'name' => 'required|string|max:10',
+        //     'description' => 'required|string'
+        // ]);
     }
 
     /**
