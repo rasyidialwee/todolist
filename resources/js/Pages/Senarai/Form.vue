@@ -15,6 +15,17 @@
     <span class="p-float-label">
       <InputText type="text" v-model="form.description" />
       <label for="username">Description</label>
+      <div v-if="errors.description">
+        <div v-if="errors.description.length > 0">
+          <p
+            v-for="(err, i) in errors.description"
+            :key="i"
+            class="text-red-400"
+          >
+            {{ err }}
+          </p>
+        </div>
+      </div>
     </span>
     <Button label="Save" @click="submit" />
   </div>
