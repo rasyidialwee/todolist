@@ -13,4 +13,14 @@ class Senarai extends Model
         'name',
         'description',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function kerjas()
+    {
+        return $this->hasMany(Kerja::class);
+    }
 }

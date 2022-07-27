@@ -15,7 +15,12 @@ class SenaraiController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+        $senarais = $user->senarais;
+
+        return inertia('Senarai/Index', [
+            'senarais' => $senarais,
+        ]);
     }
 
     /**
