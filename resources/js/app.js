@@ -16,6 +16,10 @@ import "primeicons/primeicons.css";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
 
+import Toast, { POSITION } from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -31,6 +35,10 @@ createInertiaApp({
             .use(PrimeVue)
             .component("Button", Button)
             .component("InputText", InputText)
+            .use(Toast, {
+                timeout: 2000,
+                position: POSITION.BOTTOM_RIGHT,
+            })
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .mount(el);

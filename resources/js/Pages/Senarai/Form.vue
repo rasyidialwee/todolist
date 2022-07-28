@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="p-float-label">
-      <InputText type="text" v-model="form.name" />
+      <InputText type="text" v-model="form.name" maxlength="10" />
       <label for="username">Name</label>
 
       <div v-if="errors.name">
@@ -44,18 +44,16 @@ export default {
   },
   methods: {
     submit() {
-      //   console.log("aa", this.form);
       axios
         .post(route("senarai.store"), this.form)
         .then((resp) => {
           console.log("resp", resp);
+          this.$emit("saved", resp.data);
         })
         .catch((err) => {
           this.errors = err.response.data.errors;
         })
-        .then(() => {
-          //code
-        });
+        .then(() => {});
     },
   },
 };
