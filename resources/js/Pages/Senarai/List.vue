@@ -4,17 +4,21 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Status</th>
+          <th>Description</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Siap</td>
+        <tr v-for="senarai in senarais" :key="senarai.id">
+          <td>{{ senarai.name }}</td>
+          <td>{{ senarai.description }}</td>
           <td>
-            <button>Edit</button>
-            <button>Delete</button>
+            <Button
+              label="Edit"
+              @click="this.$emit('edit', senarai)"
+              class="p-button-warning"
+            />
+            <Button label="Delete" class="p-button-danger" />
           </td>
         </tr>
       </tbody>
@@ -23,7 +27,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    senarais: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

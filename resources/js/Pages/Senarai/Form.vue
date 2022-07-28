@@ -37,6 +37,12 @@
 
 <script>
 export default {
+  props: {
+    senarai: {
+      default: null,
+      type: Object,
+    },
+  },
   data() {
     return {
       isLoading: false,
@@ -63,6 +69,12 @@ export default {
           this.isLoading = false;
         });
     },
+  },
+  mounted() {
+    if (this.senarai !== null) {
+      this.form.name = this.senarai.name;
+      this.form.description = this.senarai.description;
+    }
   },
 };
 </script>

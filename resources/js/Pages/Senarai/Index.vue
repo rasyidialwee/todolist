@@ -15,10 +15,17 @@ export default {
     List,
     SenaraiForm,
   },
-  props: ["senarais"],
+  props: {
+    senarais: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       isFormOpen: false,
+      _senarais: this.senarais,
+      selectedSenarai: null,
     };
   },
   methods: {
@@ -28,8 +35,16 @@ export default {
     },
     saved(senarai) {
       console.log("dah save", senarai);
+      this._senarais.push(senarai);
+
       this.isFormOpen = false;
+
       this.toast.success("Senarai " + senarai.name + " Saved!!");
+    },
+    editSenarai(senarai) {
+      this.selectedSenarai = senarai;
+      this.isFormOpen = true;
+      console.log("selected", this.selectedSenarai);
     },
   },
 };
@@ -45,8 +60,12 @@ export default {
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <Button label="+" @click="toggleForm" />
         <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-          <senarai-form v-if="isFormOpen" @saved="saved" />
-          <list v-else />
+          <senarai-form
+            v-if="isFormOpen"
+            @saved="saved"
+            :senarai="selectedSenarai"
+          />
+          <list v-else :senarais="_senarais" @edit="editSenarai" />
         </div>
       </div>
     </div>
