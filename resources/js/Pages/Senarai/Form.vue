@@ -27,7 +27,11 @@
         </div>
       </div>
     </span>
-    <Button label="Save" @click="submit" />
+    <Button
+      :label="isLoading ? '...loading' : 'Save'"
+      :disabled="isLoading"
+      @click="submit"
+    />
   </div>
 </template>
 
@@ -35,6 +39,7 @@
 export default {
   data() {
     return {
+      isLoading: false,
       errors: [],
       form: {
         name: "",
@@ -44,6 +49,7 @@ export default {
   },
   methods: {
     submit() {
+      this.isLoading = true;
       axios
         .post(route("senarai.store"), this.form)
         .then((resp) => {
@@ -53,7 +59,9 @@ export default {
         .catch((err) => {
           this.errors = err.response.data.errors;
         })
-        .then(() => {});
+        .then(() => {
+          this.isLoading = false;
+        });
     },
   },
 };
