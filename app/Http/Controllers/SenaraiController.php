@@ -68,17 +68,6 @@ class SenaraiController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Senarai  $senarai
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Senarai $senarai)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateSenaraiRequest  $request
@@ -87,7 +76,11 @@ class SenaraiController extends Controller
      */
     public function update(UpdateSenaraiRequest $request, Senarai $senarai)
     {
-        //
+        $senarai->name = $request->name;
+        $senarai->description = $request->description;
+        $senarai->save();
+
+        return $senarai;
     }
 
     /**
@@ -98,6 +91,6 @@ class SenaraiController extends Controller
      */
     public function destroy(Senarai $senarai)
     {
-        //
+        return $senarai->delete();
     }
 }

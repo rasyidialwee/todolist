@@ -40,4 +40,14 @@ Route::middleware([
         '/senarais',
         [SenaraiController::class, 'store']
     )->name('senarai.store');
+
+    Route::post(
+        '/senarais/{senarai}',
+        [SenaraiController::class, 'update']
+    )->name('senarai.update');
+
+    Route::delete(
+        '/senarais/{senarai}',
+        [SenaraiController::class, 'destroy']
+    )->name('senarai.delete');
 });

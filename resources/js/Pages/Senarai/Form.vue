@@ -28,6 +28,13 @@
       </div>
     </span>
     <Button
+      v-if="senarai !== null"
+      :label="isLoading ? '...loading' : 'Update'"
+      :disabled="isLoading"
+      @click="submit"
+    />
+    <Button
+      v-else
       :label="isLoading ? '...loading' : 'Save'"
       :disabled="isLoading"
       @click="submit"
@@ -54,12 +61,10 @@ export default {
     };
   },
   methods: {
-    submit() {
-      this.isLoading = true;
+    save() {
       axios
         .post(route("senarai.store"), this.form)
         .then((resp) => {
-          console.log("resp", resp);
           this.$emit("saved", resp.data);
         })
         .catch((err) => {
@@ -68,6 +73,31 @@ export default {
         .then(() => {
           this.isLoading = false;
         });
+    },
+    update() {
+      axios
+        .post(route("senarai.update", this.senarai.id), this.form)
+        .then((resp) => {
+          console.log("resp", resp);
+          this.$emit("updated", resp.data);
+        })
+        .catch((err) => {
+          this.errors = err.response.data.errors;
+        })
+        .then(() => {
+          this.isLoading = false;
+        });
+    },
+    submit() {
+      this.isLoading = true;
+
+      this.senarai !== null ? this.update() : this.save();
+      //   same as above
+      //   if (this.senarai !== null) {
+      //     this.update;
+      //   } else {
+      //     this.save;
+      //   }
     },
   },
   mounted() {

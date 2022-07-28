@@ -13,7 +13,7 @@ class UpdateSenaraiRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateSenaraiRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|max:10',
+            'description' => 'required|string'
         ];
     }
 }

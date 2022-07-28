@@ -31,20 +31,29 @@ export default {
   methods: {
     toggleForm() {
       this.isFormOpen = !this.isFormOpen;
-      console.log(this.isFormOpen);
+      this.selectedSenarai = null;
     },
     saved(senarai) {
-      console.log("dah save", senarai);
       this._senarais.push(senarai);
 
       this.isFormOpen = false;
 
       this.toast.success("Senarai " + senarai.name + " Saved!!");
     },
+    updated(senarai) {
+      let updated = this._senarais.findIndex(
+        (_senarai) => _senarai.id === senarai.id
+      );
+
+      this._senarais[updated] = { ...senarai };
+
+      this.isFormOpen = false;
+
+      this.toast.success("Senarai " + senarai.name + " Updated!!");
+    },
     editSenarai(senarai) {
       this.selectedSenarai = senarai;
       this.isFormOpen = true;
-      console.log("selected", this.selectedSenarai);
     },
   },
 };
@@ -58,11 +67,12 @@ export default {
 
     <div class="py-12">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <Button label="+" @click="toggleForm" />
+        <Button :label="isFormOpen ? 'Back' : '+'" @click="toggleForm" />
         <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
           <senarai-form
             v-if="isFormOpen"
             @saved="saved"
+            @updated="updated"
             :senarai="selectedSenarai"
           />
           <list v-else :senarais="_senarais" @edit="editSenarai" />

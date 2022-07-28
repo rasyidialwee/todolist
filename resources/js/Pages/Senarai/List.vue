@@ -18,7 +18,11 @@
               @click="this.$emit('edit', senarai)"
               class="p-button-warning"
             />
-            <Button label="Delete" class="p-button-danger" />
+            <Button
+              label="Delete"
+              @click="deleteSenarai(senarai)"
+              class="p-button-danger"
+            />
           </td>
         </tr>
       </tbody>
@@ -32,6 +36,27 @@ export default {
     senarais: {
       type: Array,
       required: true,
+    },
+  },
+  methods: {
+    deleteSenarai(senarai) {
+      console.log("nak delete", senarai);
+
+      axios
+        .delete(route("senarai.delete", senarai.id))
+        .then((resp) => {
+          console.log("delete");
+
+          let deleted = this.senarais.findIndex(
+            (_senarai) => _senarai.id === senarai.id
+          );
+
+          this.senarais.splice(deleted, 1);
+        })
+        .catch((err) => {
+          this.errors = err.response.data.errors;
+        })
+        .then(() => {});
     },
   },
 };
