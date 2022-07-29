@@ -13,7 +13,7 @@
           <td>{{ senarai.name }}</td>
           <td>{{ senarai.description }}</td>
           <td>
-            <Link :href="route('senarai.show', senarai.id)">
+            <Link :href="route('senarai.show', senarai.uuid)">
               <Button label="View" class="p-button-info" />
             </Link>
 

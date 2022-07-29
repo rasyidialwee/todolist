@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSenaraiRequest;
 use App\Http\Requests\UpdateSenaraiRequest;
 use App\Models\Senarai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SenaraiController extends Controller
 {
@@ -47,7 +48,9 @@ class SenaraiController extends Controller
         //     'description' => 'required|string'
         // ]);
         $user = auth()->user();
+
         $senarai = new Senarai();
+        $senarai->uuid = Str::uuid();
         $senarai->name = $request->name;
         $senarai->description = $request->description;
         $senarai->user_id = $user->id;
