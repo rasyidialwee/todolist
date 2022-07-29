@@ -20,7 +20,6 @@ class KerjaFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'status' => rand(0, 1),
-            'senarai_id' => Senarai::factory(),
         ];
     }
 }

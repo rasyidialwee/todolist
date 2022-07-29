@@ -10,6 +10,7 @@ class Senarai extends Model
     use HasFactory;
 
     protected $fillable = [
+        'uuid',
         'name',
         'description',
     ];
