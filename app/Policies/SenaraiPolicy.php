@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Senarai;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Auth\Access\Response;
 
 class SenaraiPolicy
 {
@@ -18,7 +19,6 @@ class SenaraiPolicy
      */
     public function viewAny(User $user)
     {
-        //
     }
 
     /**
@@ -30,7 +30,7 @@ class SenaraiPolicy
      */
     public function view(User $user, Senarai $senarai)
     {
-        //
+        return $user->id === $senarai->user_id ? Response::allow() : Response::deny('Maaf Senarai Ini Bukan milik Anda.');
     }
 
     /**
@@ -53,7 +53,7 @@ class SenaraiPolicy
      */
     public function update(User $user, Senarai $senarai)
     {
-        //
+        $this->view($user, $senarai);
     }
 
     /**
