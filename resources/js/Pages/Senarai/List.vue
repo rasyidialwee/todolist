@@ -13,6 +13,10 @@
           <td>{{ senarai.name }}</td>
           <td>{{ senarai.description }}</td>
           <td>
+            <Link :href="route('senarai.show', senarai.id)">
+              <Button label="View" class="p-button-info" />
+            </Link>
+
             <Button
               label="Edit"
               @click="this.$emit('edit', senarai)"
@@ -31,7 +35,11 @@
 </template>
 
 <script>
+import { Link } from "@inertiajs/inertia-vue3";
 export default {
+  components: {
+    Link,
+  },
   props: {
     senarais: {
       type: Array,

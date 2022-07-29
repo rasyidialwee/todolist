@@ -34,7 +34,7 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/senarai', [SenaraiController::class, 'index']);
+    Route::get('/senarai', [SenaraiController::class, 'index'])->name('senarai');
 
     Route::post(
         '/senarais',
@@ -50,4 +50,9 @@ Route::middleware([
         '/senarais/{senarai}',
         [SenaraiController::class, 'destroy']
     )->name('senarai.delete');
+
+    Route::get(
+        '/senarais/{senarai}',
+        [SenaraiController::class, 'show']
+    )->name('senarai.show');
 });

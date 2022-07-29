@@ -64,7 +64,9 @@ class SenaraiController extends Controller
      */
     public function show(Senarai $senarai)
     {
-        //
+        return inertia('Senarai/Show', [
+            'senarai' => $senarai
+        ]);
     }
 
     /**
